@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Attendance Reports - SmartAttend</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 25px;
+      background: #f4f6f9;
+      color: #222;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .header {
+      background: #1f4e79;
+      color: white;
+      padding: 25px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+
+    .header h1 {
+      margin: 0 0 8px;
+    }
+
+    .card {
+      background: white;
+      padding: 22px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    }
+
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+    }
+
+    .box {
+      background: #eef3f8;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .box h3 {
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    .box p {
+      font-size: 25px;
+      font-weight: bold;
+      margin: 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+
+    th, td {
+      padding: 13px;
+      border-bottom: 1px solid #ddd;
+      text-align: left;
+    }
+
+    th {
+      background: #f0f3f7;
+    }
+
+    .good {
+      color: #198754;
+      font-weight: bold;
+    }
+
+    .low {
+      color: #dc3545;
+      font-weight: bold;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    button,
+    .back {
+      padding: 12px 18px;
+      border: none;
+      border-radius: 7px;
+      background: #1f4e79;
+      color: white;
+      cursor: pointer;
+      text-decoration: none;
+      font-size: 15px;
+    }
+
+    button:hover,
+    .back:hover {
+      opacity: 0.9;
+    }
+
+    @media (max-width: 700px) {
+      .summary {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      table {
+        font-size: 13px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="header">
+    <h1>📈 Attendance Reports</h1>
+    <p>Student attendance report and monthly summary</p>
+  </div>
+
+
+  <!-- Summary -->
+
+  <div class="card">
+
+    <h2>Overall Attendance</h2>
+
+    <br>
+
+    <div class="summary">
+
+      <div class="box">
+        <h3>Total Classes</h3>
+        <p>120</p>
+      </div>
+
+      <div class="box">
+        <h3>Present</h3>
+        <p>94</p>
+      </div>
+
+      <div class="box">
+        <h3>Absent</h3>
+        <p>26</p>
+      </div>
+
+      <div class="box">
+        <h3>Attendance</h3>
+        <p>78.3%</p>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- Subject Report -->
+
+  <div class="card">
+
+    <h2>Subject-wise Report</h2>
+
+    <table>
+
+      <thead>
+        <tr>
+          <th>Subject</th>
+          <th>Total Classes</th>
+          <th>Present</th>
+          <th>Absent</th>
+          <th>Attendance</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <tr>
+          <td>Mathematics</td>
+          <td>40</td>
+          <td>34</td>
+          <td>6</td>
+          <td>85%</td>
+          <td class="good">Good</td>
+        </tr>
+
+        <tr>
+          <td>Physics</td>
+          <td>38</td>
+          <td>27</td>
+          <td>11</td>
+          <td>71%</td>
+          <td class="low">Low Attendance</td>
+        </tr>
+
+        <tr>
+          <td>Computer Science</td>
+          <td>42</td>
+          <td>34</td>
+          <td>8</td>
+          <td>81%</td>
+          <td class="good">Good</td>
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+
+  <!-- Actions -->
+
+  <div class="card">
+
+    <h2>Report Actions</h2>
+
+    <br>
+
+    <div class="buttons">
+
+      <button onclick="downloadReport()">
+        📥 Download Report
+      </button>
+
+      <a href="/" class="back">
+        ← Dashboard
+      </a>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<script>
+
+function downloadReport() {
+
+  const report =
+`SMART ATTENDANCE REPORT
+
+Total Classes: 120
+Present: 94
+Absent: 26
+Overall Attendance: 78.3%
+
+SUBJECT-WISE REPORT
+
+Mathematics: 85%
+Physics: 71% - Low Attendance
+Computer Science: 81%
+`;
+
+  const blob =
+    new Blob([report], { type: "text/plain" });
+
+  const url =
+    URL.createObjectURL(blob);
+
+  const link =
+    document.createElement("a");
+
+  link.href = url;
+  link.download = "attendance-report.txt";
+
+  link.click();
+
+  URL.revokeObjectURL(url);
+}
+
+</script>
+
+</body>
+</html>

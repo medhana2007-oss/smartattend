@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Attendance History - SmartAttend</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f4f6f9;
+      color: #222;
+      padding: 25px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .header {
+      background: #1f4e79;
+      color: white;
+      padding: 25px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+
+    .header h1 {
+      margin-bottom: 8px;
+    }
+
+    .card {
+      background: white;
+      padding: 22px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    }
+
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+    }
+
+    .box {
+      padding: 18px;
+      border-radius: 10px;
+      background: #eef3f8;
+      text-align: center;
+    }
+
+    .box h3 {
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+
+    .box p {
+      font-size: 25px;
+      font-weight: bold;
+    }
+
+    .calculator {
+      background: #eef3f8;
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 15px;
+    }
+
+    .calculator h3 {
+      margin-bottom: 12px;
+    }
+
+    .result {
+      margin-top: 15px;
+      padding: 15px;
+      border-radius: 8px;
+      font-size: 17px;
+      font-weight: bold;
+      background: white;
+    }
+
+    .warning {
+      color: #dc3545;
+    }
+
+    .success {
+      color: #198754;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+
+    th,
+    td {
+      padding: 13px;
+      border-bottom: 1px solid #ddd;
+      text-align: left;
+    }
+
+    th {
+      background: #f0f3f7;
+    }
+
+    .present {
+      color: #198754;
+      font-weight: bold;
+    }
+
+    .absent {
+      color: #dc3545;
+      font-weight: bold;
+    }
+
+    .back-btn {
+      display: inline-block;
+      padding: 11px 18px;
+      background: #1f4e79;
+      color: white;
+      text-decoration: none;
+      border-radius: 7px;
+    }
+
+    @media (max-width: 700px) {
+      .summary {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      table {
+        font-size: 13px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="header">
+    <h1>📊 Attendance History</h1>
+    <p>Attendance history and 75% target calculator</p>
+  </div>
+
+
+  <!-- Summary -->
+
+  <div class="card">
+
+    <h2>Overall Summary</h2>
+
+    <br>
+
+    <div class="summary">
+
+      <div class="box">
+        <h3>Total Classes</h3>
+        <p id="totalClasses">120</p>
+      </div>
+
+      <div class="box">
+        <h3>Present</h3>
+        <p id="totalPresent">94</p>
+      </div>
+
+      <div class="box">
+        <h3>Absent</h3>
+        <p id="totalAbsent">26</p>
+      </div>
+
+      <div class="box">
+        <h3>Attendance %</h3>
+        <p id="percentage">78.3%</p>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- 75% Calculator -->
+
+  <div class="card">
+
+    <h2>🎯 75% Attendance Calculator</h2>
+
+    <div class="calculator">
+
+      <h3 id="calculatorTitle">
+        Attendance Target
+      </h3>
+
+      <div id="calculatorResult" class="result">
+        Calculating...
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- Attendance History -->
+
+  <div class="card">
+
+    <h2>Attendance Records</h2>
+
+    <table>
+
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Subject</th>
+          <th>Status</th>
+          <th>Attendance %</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <tr>
+          <td>01-10-2026</td>
+          <td>Mathematics</td>
+          <td class="present">Present</td>
+          <td>85%</td>
+        </tr>
+
+        <tr>
+          <td>02-10-2026</td>
+          <td>Physics</td>
+          <td class="absent">Absent</td>
+          <td>71%</td>
+        </tr>
+
+        <tr>
+          <td>03-10-2026</td>
+          <td>Computer Science</td>
+          <td class="present">Present</td>
+          <td>81%</td>
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+
+  <a href="/attendance" class="back-btn">
+    ← Back to Attendance
+  </a>
+
+</div>
+
+
+<script>
+
+  // Current attendance values
+  let totalClasses = 120;
+  let presentClasses = 94;
+  let absentClasses = 26;
+
+  // Check saved attendance
+  const savedData =
+    localStorage.getItem("lastAttendance");
+
+  if (savedData) {
+
+    const data = JSON.parse(savedData);
+
+    totalClasses = data.total;
+    presentClasses = data.present;
+    absentClasses = data.absent;
+  }
+
+
+  // Update summary
+
+  document.getElementById("totalClasses").textContent =
+    totalClasses;
+
+  document.getElementById("totalPresent").textContent =
+    presentClasses;
+
+  document.getElementById("totalAbsent").textContent =
+    absentClasses;
+
+
+  const currentPercentage =
+    (presentClasses / totalClasses) * 100;
+
+
+  document.getElementById("percentage").textContent =
+    currentPercentage.toFixed(1) + "%";
+
+
+  // 75% calculation
+
+  const result =
+    document.getElementById("calculatorResult");
+
+
+  if (currentPercentage >= 75) {
+
+    result.className = "result success";
+
+    result.innerHTML =
+      "✅ Your attendance is above 75%. " +
+      "You have reached the required attendance.";
+
+  } else {
+
+    /*
+      Formula:
+
+      (Present + x) / (Total + x) = 0.75
+
+      x = (0.75 × Total - Present) / 0.25
+    */
+
+    const requiredClasses =
+      Math.ceil(
+        (0.75 * totalClasses - presentClasses) / 0.25
+      );
+
+
+    result.className = "result warning";
+
+    result.innerHTML =
+      "⚠️ Your attendance is below 75%.<br><br>" +
+      "You need to attend <strong>" +
+      requiredClasses +
+      "</strong> consecutive classes to reach 75%.";
+
+  }
+
+</script>
+
+</body>
+</html>

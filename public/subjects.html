@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>BCA Subjects - SmartAttend</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+
+    .subjects-container {
+      padding: 30px;
+    }
+
+    .subject-grid {
+      display: grid;
+      grid-template-columns:
+        repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 25px;
+    }
+
+    .subject-card {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    }
+
+    .subject-icon-large {
+      width: 55px;
+      height: 55px;
+      border-radius: 12px;
+      background: #eef2ff;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 25px;
+      margin-bottom: 15px;
+    }
+
+    .subject-card h2 {
+      margin-bottom: 8px;
+    }
+
+    .subject-card p {
+      color: #666;
+      margin: 6px 0;
+    }
+
+    .attendance-number {
+      font-size: 32px;
+      font-weight: bold;
+      margin: 15px 0;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 10px;
+      background: #eee;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      border-radius: 10px;
+      background: #22c55e;
+    }
+
+    .low {
+      color: #ef4444;
+    }
+
+    .good {
+      color: #22c55e;
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin-top: 25px;
+      padding: 10px 18px;
+      border-radius: 8px;
+      background: #4f46e5;
+      color: white;
+      text-decoration: none;
+    }
+
+    @media (max-width: 600px) {
+
+      .subjects-container {
+        padding: 15px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+  <div class="subjects-container">
+
+    <h1>📚 BCA Subjects</h1>
+
+    <p>
+      Your subject-wise attendance
+    </p>
+
+
+    <div class="subject-grid">
+
+
+      <!-- ACCOUNTS -->
+
+      <div class="subject-card">
+
+        <div class="subject-icon-large">
+          📒
+        </div>
+
+        <h2>Accounts</h2>
+
+        <p>Total Classes: 40</p>
+        <p>Present: 34</p>
+        <p>Absent: 6</p>
+
+        <div class="attendance-number good">
+          85%
+        </div>
+
+        <div class="progress-bar">
+
+          <div
+            class="progress-fill"
+            style="width:85%">
+          </div>
+
+        </div>
+
+        <p class="good">
+          ✅ Good Attendance
+        </p>
+
+      </div>
+
+
+      <!-- TAMIL -->
+
+      <div class="subject-card">
+
+        <div class="subject-icon-large">
+          📖
+        </div>
+
+        <h2>தமிழ்</h2>
+
+        <p>Total Classes: 38</p>
+        <p>Present: 32</p>
+        <p>Absent: 6</p>
+
+        <div class="attendance-number good">
+          84%
+        </div>
+
+        <div class="progress-bar">
+
+          <div
+            class="progress-fill"
+            style="width:84%">
+          </div>
+
+        </div>
+
+        <p class="good">
+          ✅ Good Attendance
+        </p>
+
+      </div>
+
+
+      <!-- SBS -->
+
+      <div class="subject-card">
+
+        <div class="subject-icon-large">
+          📘
+        </div>
+
+        <h2>SBS</h2>
+
+        <p>Total Classes: 36</p>
+        <p>Present: 25</p>
+        <p>Absent: 11</p>
+
+        <div class="attendance-number low">
+          69%
+        </div>
+
+        <div class="progress-bar">
+
+          <div
+            class="progress-fill"
+            style="width:69%">
+          </div>
+
+        </div>
+
+        <p class="low">
+          ⚠️ Low Attendance
+        </p>
+
+      </div>
+
+
+      <!-- DATA BRICKS & DATA ENGINEERING -->
+
+      <div class="subject-card">
+
+        <div class="subject-icon-large">
+          📊
+        </div>
+
+        <h2>Data Bricks & Data Engineering</h2>
+
+        <p>Total Classes: 42</p>
+        <p>Present: 35</p>
+        <p>Absent: 7</p>
+
+        <div class="attendance-number good">
+          83%
+        </div>
+
+        <div class="progress-bar">
+
+          <div
+            class="progress-fill"
+            style="width:83%">
+          </div>
+
+        </div>
+
+        <p class="good">
+          ✅ Good Attendance
+        </p>
+
+      </div>
+
+
+      <!-- JAVA -->
+
+      <div class="subject-card">
+
+        <div class="subject-icon-large">
+          ☕
+        </div>
+
+        <h2>Java Programming</h2>
+
+        <p>Total Classes: 44</p>
+        <p>Present: 30</p>
+        <p>Absent: 14</p>
+
+        <div class="attendance-number low">
+          68%
+        </div>
+
+        <div class="progress-bar">
+
+          <div
+            class="progress-fill"
+            style="width:68%">
+          </div>
+
+        </div>
+
+        <p class="low">
+          ⚠️ Low Attendance
+        </p>
+
+      </div>
+
+
+    </div>
+
+
+    <a href="/" class="back-btn">
+      ← Back to Dashboard
+    </a>
+
+  </div>
+
+</body>
+
+</html>

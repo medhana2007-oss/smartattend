@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Attendance - SmartAttend</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f4f6f9;
+      color: #222;
+      padding: 25px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .header {
+      background: #1f4e79;
+      color: white;
+      padding: 25px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+
+    .header h1 {
+      margin-bottom: 8px;
+    }
+
+    .header p {
+      opacity: 0.9;
+    }
+
+    .card {
+      background: white;
+      padding: 22px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 7px;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 11px;
+      border: 1px solid #ccc;
+      border-radius: 7px;
+      font-size: 15px;
+    }
+
+    h2 {
+      margin-bottom: 18px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      padding: 13px;
+      border-bottom: 1px solid #ddd;
+      text-align: left;
+    }
+
+    th {
+      background: #f0f3f7;
+    }
+
+    .status {
+      display: flex;
+      gap: 8px;
+    }
+
+    .status button {
+      padding: 7px 13px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .present {
+      background: #28a745;
+      color: white;
+    }
+
+    .absent {
+      background: #dc3545;
+      color: white;
+    }
+
+    .selected {
+      outline: 3px solid #222;
+    }
+
+    .save-btn {
+      width: 100%;
+      padding: 14px;
+      background: #1f4e79;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    .save-btn:hover {
+      background: #163a5c;
+    }
+
+    .message {
+      margin-top: 15px;
+      padding: 12px;
+      background: #d4edda;
+      color: #155724;
+      border-radius: 7px;
+      display: none;
+    }
+
+    @media (max-width: 700px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      table {
+        font-size: 13px;
+      }
+
+      .status {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <!-- Header -->
+    <div class="header">
+      <h1>📋 Smart Attendance</h1>
+      <p>Faculty Attendance Marking System</p>
+    </div>
+
+    <!-- Class Details -->
+    <div class="card">
+
+      <h2>Class Details</h2>
+
+      <div class="form-row">
+
+        <div>
+          <label>Faculty Name</label>
+          <input
+            type="text"
+            id="facultyName"
+            placeholder="Enter faculty name"
+          >
+        </div>
+
+        <div>
+          <label>Subject</label>
+          <select id="subject">
+            <option value="Mathematics">Mathematics</option>
+            <option value="Physics">Physics</option>
+            <option value="Computer Science">Computer Science</option>
+          </select>
+        </div>
+
+        <div>
+          <label>Date</label>
+          <input type="date" id="attendanceDate">
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Student List -->
+    <div class="card">
+
+      <h2>Student Attendance</h2>
+
+      <table>
+
+        <thead>
+          <tr>
+            <th>No.</th>
+            <th>Student Name</th>
+            <th>Roll Number</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+
+        <tbody id="studentTable">
+
+          <tr>
+            <td>1</td>
+            <td>Arun Kumar</td>
+            <td>101</td>
+            <td>
+              <div class="status">
+                <button
+                  class="present"
+                  onclick="markAttendance(this, 'Present')"
+                >
+                  Present
+                </button>
+
+                <button
+                  class="absent"
+                  onclick="markAttendance(this, 'Absent')"
+                >
+                  Absent
+                </button>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td>2</td>
+            <td>Priya</td>
+            <td>102</td>
+            <td>
+              <div class="status">
+                <button
+                  class="present"
+                  onclick="markAttendance(this, 'Present')"
+                >
+                  Present
+                </button>
+
+                <button
+                  class="absent"
+                  onclick="markAttendance(this, 'Absent')"
+                >
+                  Absent
+                </button>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td>3</td>
+            <td>Karthik</td>
+            <td>103</td>
+            <td>
+              <div class="status">
+                <button
+                  class="present"
+                  onclick="markAttendance(this, 'Present')"
+                >
+                  Present
+                </button>
+
+                <button
+                  class="absent"
+                  onclick="markAttendance(this, 'Absent')"
+                >
+                  Absent
+                </button>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td>4</td>
+            <td>Divya</td>
+            <td>104</td>
+            <td>
+              <div class="status">
+                <button
+                  class="present"
+                  onclick="markAttendance(this, 'Present')"
+                >
+                  Present
+                </button>
+
+                <button
+                  class="absent"
+                  onclick="markAttendance(this, 'Absent')"
+                >
+                  Absent
+                </button>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td>5</td>
+            <td>Rahul</td>
+            <td>105</td>
+            <td>
+              <div class="status">
+                <button
+                  class="present"
+                  onclick="markAttendance(this, 'Present')"
+                >
+                  Present
+                </button>
+
+                <button
+                  class="absent"
+                  onclick="markAttendance(this, 'Absent')"
+                >
+                  Absent
+                </button>
+              </div>
+            </td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+      <button class="save-btn" onclick="saveAttendance()">
+        💾 Save Attendance
+      </button>
+
+      <div class="message" id="message">
+        ✅ Attendance saved successfully!
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <script>
+
+    // Set today's date automatically
+    document.getElementById("attendanceDate").value =
+      new Date().toISOString().split("T")[0];
+
+
+    // Mark Present / Absent
+    function markAttendance(button, status) {
+
+      const buttons = button.parentElement.querySelectorAll("button");
+
+      buttons.forEach(btn => {
+        btn.classList.remove("selected");
+      });
+
+      button.classList.add("selected");
+
+      button.dataset.status = status;
+    }
+
+
+    // Save attendance
+    function saveAttendance() {
+
+      const faculty =
+        document.getElementById("facultyName").value;
+
+      const subject =
+        document.getElementById("subject").value;
+
+      const date =
+        document.getElementById("attendanceDate").value;
+
+      if (faculty.trim() === "") {
+        alert("Please enter faculty name.");
+        return;
+      }
+
+      const rows =
+        document.querySelectorAll("#studentTable tr");
+
+      let present = 0;
+      let absent = 0;
+
+      rows.forEach(row => {
+
+        const selected =
+          row.querySelector(".selected");
+
+        if (selected) {
+
+          if (selected.dataset.status === "Present") {
+            present++;
+          }
+
+          if (selected.dataset.status === "Absent") {
+            absent++;
+          }
+
+        }
+
+      });
+
+
+      const total = rows.length;
+
+      if (present + absent < total) {
+        alert("Please mark attendance for all students.");
+        return;
+      }
+
+
+      const attendanceData = {
+        faculty: faculty,
+        subject: subject,
+        date: date,
+        present: present,
+        absent: absent,
+        total: total
+      };
+
+
+      // Store attendance in browser
+      localStorage.setItem(
+        "lastAttendance",
+        JSON.stringify(attendanceData)
+      );
+
+
+      document.getElementById("message").style.display = "block";
+
+      document.getElementById("message").innerHTML =
+        "✅ Attendance saved successfully! " +
+        "Present: " + present +
+        " | Absent: " + absent;
+    }
+
+  </script>
+
+</body>
+</html>

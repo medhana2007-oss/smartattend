@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Registration</title>
+</head>
+
+<body>
+
+    <h2>Student Registration</h2>
+
+    <form id="registerForm">
+
+        <label>Name</label><br>
+        <input type="text" id="name" required><br><br>
+
+        <label>Email</label><br>
+        <input type="email" id="email" required><br><br>
+
+        <button type="button" onclick="sendOTP()">Send OTP</button>
+
+        <br><br>
+
+        <label>Enter OTP</label><br>
+        <input type="text" id="otp" maxlength="6"><br><br>
+
+        <button type="button" onclick="verifyOTP()">
+            Verify OTP
+        </button>
+
+        <p id="message"></p>
+
+        <button type="submit">
+            Register
+        </button>
+
+    </form>
+
+    <script>
+
+        async function sendOTP() {
+
+            const email = document.getElementById("email").value;
+
+            if (!email) {
+                alert("Enter your email");
+                return;
+            }
+
+            const response = await fetch("http://localhost:5000/send-otp", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    email: email
+                })
+            });
+
+            const data = await response.json();
+
+            document.getElementById("message").innerText =
+                data.message;
+        }
+
+        async function verifyOTP() {
+
+            const email = document.getElementById("email").value;
+            const otp = document.getElementById("otp").value;
+
+            const response = await fetch("http://localhost:5000/verify-otp", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    email: email,
+                    otp: otp
+                })
+            });
+
+            const data = await response.json();
+
+            document.getElementById("message").innerText =
+                data.message;
+        }
+
+        document.getElementById("registerForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            alert("Registration completed!");
+        });
+
+    </script>
+
+</body>
+</html>

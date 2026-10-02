@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Attendance Management System</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="app">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+
+    <div class="logo">
+      <div class="logo-icon">SA</div>
+      <div>
+        <h2>SmartAttend</h2>
+        <span>Attendance System</span>
+      </div>
+    </div>
+
+    <nav>
+
+      <button class="nav-item active"
+        onclick="window.location.href='/'">
+        🏠 Dashboard
+      </button>
+
+      <button class="nav-item"
+        onclick="window.location.href='/attendance'">
+        📊 Attendance
+      </button>
+
+      <button class="nav-item"
+        onclick="window.location.href='/subjects.html'">
+        📚 Subjects
+      </button>
+
+      <button class="nav-item"
+        onclick="window.location.href='/history.html'">
+        📅 History
+      </button>
+
+      <button class="nav-item"
+        onclick="window.location.href='/reports.html'">
+        📈 Reports
+      </button>
+
+      <button class="nav-item"
+        onclick="window.location.href='/notifications.html'">
+        🔔 Notifications
+      </button>
+
+    </nav>
+
+    <div class="sidebar-bottom">
+
+      <button class="nav-item"
+        onclick="openSettings()">
+        ⚙️ Settings
+      </button>
+
+    </div>
+
+  </aside>
+
+
+  <!-- Main -->
+  <main class="main">
+
+    <header class="topbar">
+
+      <div>
+        <p class="welcome">Welcome back 👋</p>
+        <h1>Student Dashboard</h1>
+      </div>
+
+      <div class="top-actions">
+
+        <button id="themeBtn">🌙</button>
+
+        <button id="languageBtn">தமிழ்</button>
+
+        <div class="profile">
+
+          <div class="avatar">S</div>
+
+          <div>
+            <strong>Student</strong>
+            <small>Student ID: STU001</small>
+          </div>
+
+        </div>
+
+      </div>
+
+    </header>
+
+
+    <!-- Attendance Cards -->
+    <section class="cards">
+
+      <div class="card attendance-card">
+
+        <div class="card-title">
+          <span>Overall Attendance</span>
+          <span>📊</span>
+        </div>
+
+        <div class="percentage">78%</div>
+
+        <div class="progress">
+          <div class="progress-fill"
+               style="width:78%">
+          </div>
+        </div>
+
+        <p class="success">
+          Above 75% requirement
+        </p>
+
+      </div>
+
+
+      <div class="card">
+
+        <div class="card-title">
+          <span>Total Classes</span>
+          <span>📚</span>
+        </div>
+
+        <h2>120</h2>
+        <p>Classes conducted</p>
+
+      </div>
+
+
+      <div class="card">
+
+        <div class="card-title">
+          <span>Present</span>
+          <span>✅</span>
+        </div>
+
+        <h2>94</h2>
+        <p>Classes attended</p>
+
+      </div>
+
+
+      <div class="card">
+
+        <div class="card-title">
+          <span>Absent</span>
+          <span>❌</span>
+        </div>
+
+        <h2>26</h2>
+        <p>Classes missed</p>
+
+      </div>
+
+    </section>
+
+
+    <!-- Main Grid -->
+    <section class="dashboard-grid">
+
+
+      <!-- BCA Subjects -->
+      <div class="panel">
+
+        <div class="panel-header">
+
+          <div>
+            <h2>Subject-wise Attendance</h2>
+            <p>Your BCA subject attendance</p>
+          </div>
+
+          <button class="view-btn"
+            onclick="window.location.href='/subjects.html'">
+            View All
+          </button>
+
+        </div>
+
+
+        <!-- Accounts -->
+        <div class="subject">
+
+          <div class="subject-info">
+
+            <div class="subject-icon">A</div>
+
+            <div>
+              <strong>Accounts</strong>
+              <span>40 Classes</span>
+            </div>
+
+          </div>
+
+          <div class="subject-attendance">
+
+            <strong>85%</strong>
+
+            <div class="mini-progress">
+              <div style="width:85%"></div>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- Data Bricks & Data Engineering -->
+        <div class="subject">
+
+          <div class="subject-info">
+
+            <div class="subject-icon">D</div>
+
+            <div>
+              <strong>Data Bricks & Data Engineering</strong>
+              <span>42 Classes</span>
+            </div>
+
+          </div>
+
+          <div class="subject-attendance">
+
+            <strong>83%</strong>
+
+            <div class="mini-progress">
+              <div style="width:83%"></div>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- Java Programming -->
+        <div class="subject">
+
+          <div class="subject-info">
+
+            <div class="subject-icon">J</div>
+
+            <div>
+              <strong>Java Programming</strong>
+              <span>44 Classes</span>
+            </div>
+
+          </div>
+
+          <div class="subject-attendance warning">
+
+            <strong>68%</strong>
+
+            <div class="mini-progress">
+              <div style="width:68%"></div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- AI Risk -->
+      <div class="panel risk-panel">
+
+        <div class="panel-header">
+
+          <div>
+            <h2>AI Attendance Risk</h2>
+            <p>Based on your attendance pattern</p>
+          </div>
+
+          <span class="ai-icon">🤖</span>
+
+        </div>
+
+
+        <div class="risk-circle">
+
+          <span>Medium</span>
+          <small>Risk</small>
+
+        </div>
+
+
+        <p class="risk-text">
+
+          Your recent attendance shows some absences.
+          Regular attendance is recommended.
+
+        </p>
+
+
+        <div class="recommendation">
+
+          💡 Attend upcoming classes regularly to maintain
+          your attendance above 75%.
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- Calculator -->
+    <section class="panel calculator">
+
+      <div>
+
+        <h2>🧮 Reach 75% Attendance</h2>
+
+        <p>
+          Calculate how many consecutive classes you need to attend.
+        </p>
+
+      </div>
+
+
+      <div class="calculator-result">
+
+        <strong>0 classes</strong>
+
+        <span>
+          You have already reached 75%
+        </span>
+
+      </div>
+
+    </section>
+
+
+    <!-- Quick Actions -->
+    <section class="panel">
+
+      <div class="panel-header">
+
+        <div>
+          <h2>Quick Actions</h2>
+          <p>Access attendance features quickly</p>
+        </div>
+
+      </div>
+
+
+      <div style="
+        display:grid;
+        grid-template-columns:
+        repeat(auto-fit,minmax(180px,1fr));
+        gap:15px;
+      ">
+
+        <button
+          class="view-btn"
+          onclick="window.location.href='/attendance'">
+          📊 Mark Attendance
+        </button>
+
+
+        <button
+          class="view-btn"
+          onclick="window.location.href='/history.html'">
+          📅 View History
+        </button>
+
+
+        <button
+          class="view-btn"
+          onclick="window.location.href='/notifications.html'">
+          🔔 Notifications
+        </button>
+
+
+        <button
+          class="view-btn"
+          onclick="window.location.href='/reports.html'">
+          📈 Reports
+        </button>
+
+      </div>
+
+    </section>
+
+  </main>
+
+</div>
+
+
+<script src="app.js"></script>
+
+
+<script>
+
+  function openSettings() {
+
+    alert(
+      "⚙️ Settings\n\n" +
+      "Dark / Light Mode\n" +
+      "Language: English / தமிழ்"
+    );
+
+  }
+
+
+  const themeButton =
+    document.getElementById("themeBtn");
+
+  if (themeButton) {
+
+    themeButton.addEventListener(
+      "click",
+      function() {
+
+        document.body.classList.toggle(
+          "dark-mode"
+        );
+
+      }
+    );
+
+  }
+
+
+  const languageButton =
+    document.getElementById("languageBtn");
+
+  if (languageButton) {
+
+    languageButton.addEventListener(
+      "click",
+      function() {
+
+        if (languageButton.innerText === "தமிழ்") {
+
+          languageButton.innerText = "English";
+
+        } else {
+
+          languageButton.innerText = "தமிழ்";
+
+        }
+
+      }
+    );
+
+  }
+
+</script>
+
+</body>
+</html>
